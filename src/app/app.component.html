@@ -1,1 +1,7 @@
-<button mat-button>This will be a calendar</button>
+<ac-nav></ac-nav>
+<mat-drawer-container autosize>
+    <mat-drawer #drawer mode="side" [opened]="true">
+        <mat-calendar></mat-calendar>
+    </mat-drawer>
+    <router-outlet></router-outlet>
+</mat-drawer-container>

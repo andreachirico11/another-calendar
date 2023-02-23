@@ -5,7 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from '@angular/material/button';
+import { WeekModule } from './week/week.module';
+import { DayModule } from './day/ac-day.module';
+import { MonthModule } from './month/month.module';
+import { FormsModule } from '@angular/forms';
+import { SharedModule } from './shared.module';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -14,7 +19,12 @@ import { MatButtonModule } from '@angular/material/button';
     AppRoutingModule,
     StoreModule.forRoot({}, {}),
     BrowserAnimationsModule,
-    MatButtonModule,
+    WeekModule,
+    DayModule,
+    MonthModule,
+    FormsModule,
+    SharedModule,
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
