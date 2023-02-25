@@ -5,4 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './month.component.html',
   styleUrls: ['./month.component.scss'],
 })
-export class MonthComponent {}
+export class MonthComponent {
+  mockDays = Array(35).fill('');
+}

@@ -1,0 +1,37 @@
+@import 'ac-color-getter';
+
+@mixin ac-mat-form-field($theme) {
+  $white: ac-color-getter($theme, white);
+
+  mat-form-field[ac-mat-form-field],
+  mat-form-field[ac-mat-form-field-without-error] {
+    cursor: pointer;
+
+    .mat-mdc-form-field-infix {
+      padding: 0.5em !important;
+      min-height: 2em !important;
+
+      .mat-mdc-select-value {
+        color: $white;
+      }
+
+      .mat-mdc-select-arrow svg {
+        fill: $white;
+      }
+    }
+
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled) {
+      .mdc-notched-outline__trailing,
+      .mdc-notched-outline__leading,
+      .mdc-notched-outline__notch {
+        border-color: $white;
+      }
+    }
+  }
+
+  mat-form-field[ac-mat-form-field-without-error] {
+    .mat-mdc-form-field-subscript-wrapper {
+      height: 0 !important;
+    }
+  }
+}

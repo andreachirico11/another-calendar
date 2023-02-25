@@ -1,0 +1,12 @@
+mat-card {
+  padding: 0.5em;
+  cursor: pointer;
+
+  span {
+    display: inline-block;
+    width: calc(100% - 20px);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}

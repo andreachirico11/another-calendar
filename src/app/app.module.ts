@@ -9,8 +9,8 @@ import { WeekModule } from './week/week.module';
 import { DayModule } from './day/ac-day.module';
 import { MonthModule } from './month/month.module';
 import { FormsModule } from '@angular/forms';
-import { SharedModule } from './shared.module';
-import { MaterialModule } from './material.module';
+import { SharedModule } from './shared/shared.module';
+import { MaterialModule } from './shared/material.module';
 
 @NgModule({
   declarations: [AppComponent],

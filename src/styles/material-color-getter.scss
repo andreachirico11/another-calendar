@@ -1,0 +1,23 @@
+@import '@angular/material/theming';
+
+@function material-color-getter($theme, $colorName) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, toolbar);
+
+  @if ($colorName == 'accent') {
+    @return mat-color($accent);
+  }
+
+  @if ($colorName == 'warn') {
+    @return mat-color($warn);
+  }
+
+  $primary-color: mat-color($primary);
+  @if ($colorName == 'primary') {
+    @return $primary-color;
+  }
+
+  @return $primary-color;
+}

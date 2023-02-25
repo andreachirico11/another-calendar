@@ -9,3 +9,17 @@ export const Routes = {
 export type RoutesType = Values<typeof Routes>;
 
 export const RoutesArray: RoutesType[] = Object.values(Routes);
+
+export const Days = {
+  mon: 'mon',
+  tue: 'tue',
+  wed: 'wed',
+  thu: 'thu',
+  fri: 'fri',
+  sat: 'sat',
+  sun: 'sun',
+} as const;
+
+export type DaysType = Values<typeof Days>;
+
+export const DaysArray: DaysType[] = Object.values(Days);

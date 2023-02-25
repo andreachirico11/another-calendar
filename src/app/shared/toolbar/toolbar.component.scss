@@ -1,3 +1,8 @@
-.spacer {
-    flex: 1 1 auto;
+:host {
+  mat-toolbar {
+    align-items: center;
+    .spacer {
+      flex: 1 1 auto;
+    }
   }
+}

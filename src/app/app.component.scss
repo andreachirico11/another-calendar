@@ -1,7 +1,23 @@
-ac-nav {
-    height: 100px;
-}
+:host {
+  ac-nav {
+    height: 64px;
+  }
 
-mat-drawer-container {
-    height: calc(100vh - 100px);
+  .mat-drawer-inner {
+    height: 100%;
+    padding: 0 1em;
+
+    button {
+      margin-top: 2em;
+    }
+
+    mat-calendar {
+      min-width: 12em;
+      margin-top: 2em;
+    }
+  }
+
+  mat-drawer-container {
+    height: calc(100vh - 64px);
+  }
 }

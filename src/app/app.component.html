@@ -1,7 +1,16 @@
 <ac-nav></ac-nav>
 <mat-drawer-container autosize>
-    <mat-drawer #drawer mode="side" [opened]="true">
-        <mat-calendar></mat-calendar>
+    <mat-drawer #drawer mode="side" [opened]="true" class="ac-drawer">
+        <div class="mat-drawer-inner">
+
+            <button mat-fab extended color="primary">
+                <mat-icon>add</mat-icon>
+                <h3>
+                    Create
+                </h3>
+            </button>
+            <mat-calendar></mat-calendar>
+        </div>
     </mat-drawer>
     <router-outlet></router-outlet>
 </mat-drawer-container>

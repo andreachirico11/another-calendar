@@ -1,8 +1,27 @@
-<mat-grid-list cols="7">
-    <mat-grid-tile>
-
-    </mat-grid-tile>
-    <mat-grid-tile></mat-grid-tile>
-    <mat-grid-tile>3</mat-grid-tile>
-    <mat-grid-tile>4</mat-grid-tile>
-</mat-grid-list>
+<div class="month-days">
+    <div class="mont-days-tile">
+        mon
+    </div>
+    <div class="mont-days-tile">
+        tue
+    </div>
+    <div class="mont-days-tile">
+        wed
+    </div>
+    <div class="mont-days-tile">
+        thu
+    </div>
+    <div class="mont-days-tile">
+        fri
+    </div>
+    <div class="mont-days-tile">
+        sat
+    </div>
+    <div class="mont-days-tile">
+        sun
+    </div>
+</div>
+<div class="month-grid">
+    <ac-month-day *ngFor="let _ of mockDays; index as i"
+        [mockNumber]="i + 1 - (i >= 31 ? 31 : 0)"></ac-month-day>
+</div>

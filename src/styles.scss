@@ -1,4 +1,3 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
@@ -20,13 +19,15 @@ $another-calendar-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$another-calendar-theme: mat.define-light-theme((
-  color: (
-    primary: $another-calendar-primary,
-    accent: $another-calendar-accent,
-    warn: $another-calendar-warn,
+$another-calendar-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $another-calendar-primary,
+      accent: $another-calendar-accent,
+      warn: $another-calendar-warn,
+    ),
   )
-));
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -34,6 +35,35 @@ $another-calendar-theme: mat.define-light-theme((
 @include mat.all-component-themes($another-calendar-theme);
 
 /* You can add global styles to this file, and also import other style files */
+@import 'src/styles/ac-color-getter';
+@import 'src/styles/material-color-getter';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@import 'src/styles/ac-mat-form-field';
+@include ac-mat-form-field($another-calendar-theme);
+
+html,
+body {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+$foreground: map-get($another-calendar-theme, foreground);
+$foreground-text: map-get($foreground, text);
+
+ac-event-chip {
+  mat-card {
+    background-color: material-color-getter($another-calendar-theme, primary) !important;
+    color: ac-color-getter($another-calendar-theme, white);
+  }
+}
