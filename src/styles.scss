@@ -58,6 +58,10 @@ ul {
   padding: 0;
 }
 
+textarea {
+  resize: none;
+}
+
 ac-event-chip {
   mat-card {
     background-color: material-color-getter($another-calendar-theme, primary) !important;

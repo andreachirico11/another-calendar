@@ -34,4 +34,14 @@
       height: 0 !important;
     }
   }
+
+  mat-form-field[ac-mat-form-field-minimal] {
+    .mdc-text-field--filled {
+      background: none !important;
+    }
+
+    .mat-mdc-form-field-focus-overlay {
+      display: none !important;
+    }
+  }
 }

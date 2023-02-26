@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
 
 const modules = [
   MatSidenavModule,
@@ -23,6 +24,7 @@ const modules = [
   MatFormFieldModule,
   MatGridListModule,
   MatDialogModule,
+  MatInputModule,
 ];
 
 @NgModule({

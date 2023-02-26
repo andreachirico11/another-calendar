@@ -27,3 +27,24 @@ export const DaysArray: DaysType[] = Object.values(Days);
 export interface DetailsDialogData {
   eventId: string;
 }
+
+export enum OperationMode {
+  edit = 'edit',
+  new = 'new',
+}
+
+export interface CalendarEvent {
+  title: string;
+  startDateTime: Date;
+  endDateTime: Date;
+  content: string;
+}
+
+export interface FormCalendarEvent {
+  title: string;
+  startDate: Date;
+  endDate: Date;
+  startTime: string;
+  endTime: string;
+  content: string;
+}

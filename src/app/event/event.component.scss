@@ -1,0 +1,45 @@
+mat-card {
+  width: 60%;
+  margin: 5em auto;
+  padding: 2em 0;
+
+  mat-card-actions,
+  mat-card-content,
+  mat-card-title {
+    padding-left: 2em;
+    padding-right: 2em;
+  }
+
+  mat-card-title {
+    mat-form-field {
+      font-size: 3em;
+      width: 100%;
+    }
+  }
+
+  mat-card-content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 1em;
+    margin: 2em 0;
+
+    :nth-child(5) {
+      grid-row: 2 / 4;
+      grid-column: 1/5;
+
+      textarea {
+        min-height: 7em;
+      }
+    }
+  }
+
+  mat-card-actions {
+    justify-content: space-between;
+
+    button {
+      font-size: 1.5em;
+      padding: 1em 2em;
+    }
+  }
+}

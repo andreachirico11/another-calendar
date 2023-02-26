@@ -16,7 +16,7 @@ export class EventDetailsComponent {
   ) {}
 
   onEdit() {
-    this.router.navigate(['/event']).finally(() => {
+    this.router.navigate(['/event/edit'], { state: { eventId: 'pizza' } }).finally(() => {
       this.dialogRef.close();
     });
   }
