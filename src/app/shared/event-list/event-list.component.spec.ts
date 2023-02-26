@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WeekDayComponent } from './week-day.component';
+import { EventListComponent } from './event-list.component';
 
-describe('WeekDayComponent', () => {
-  let component: WeekDayComponent;
-  let fixture: ComponentFixture<WeekDayComponent>;
+describe('EventListComponent', () => {
+  let component: EventListComponent;
+  let fixture: ComponentFixture<EventListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WeekDayComponent ]
+      declarations: [ EventListComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(WeekDayComponent);
+    fixture = TestBed.createComponent(EventListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

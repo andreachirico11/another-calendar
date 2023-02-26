@@ -1,46 +1,45 @@
 <div class="col-1">
     <div class="first-slot"></div>
-    <div class="week-hours">
-        <div *ngFor="let _ of mockHoursSlots; index as i"
-            class="week-hour-slot">
-            <div class="week-hour-slot-label">
+    <div class="hours">
+        <div *ngFor="let _ of mockHoursSlots; index as i" class="hour-slot">
+            <div class="hour-slot-label">
                 {{getHourLabel(i)}}
             </div>
         </div>
     </div>
 </div>
 <div class="col-2">
-    <div class="week-days">
-        <div class="week-days-tile">
+    <div class="col-2-header">
+        <div class="col-2-tile">
             <p>mon</p>
             <p>27</p>
         </div>
-        <div class="week-days-tile">
+        <div class="col-2-tile">
             <p>tue</p>
             <p>28</p>
         </div>
-        <div class="week-days-tile">
+        <div class="col-2-tile">
             <p>wed</p>
             <p>29</p>
         </div>
-        <div class="week-days-tile">
+        <div class="col-2-tile">
             <p>thu</p>
             <p>30</p>
         </div>
-        <div class="week-days-tile">
+        <div class="col-2-tile">
             <p>fri</p>
             <p>31</p>
         </div>
-        <div class="week-days-tile">
+        <div class="col-2-tile">
             <p>sat</p>
             <p>1</p>
         </div>
-        <div class="week-days-tile">
+        <div class="col-2-tile">
             <p>sun</p>
             <p>2</p>
         </div>
     </div>
-    <div class="week-grid">
-        <ac-week-day *ngFor="let _ of mockHours; index as i"></ac-week-day>
+    <div class="col-2-grid">
+        <ac-event-list *ngFor="let _ of mockHours; index as i"></ac-event-list>
     </div>
 </div>

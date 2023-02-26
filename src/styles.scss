@@ -77,7 +77,22 @@ ac-week {
     color: $grey;
   }
 
-  ac-week-day {
+  ac-event-list {
+    border-left: $ac-table-border;
+    border-bottom: $ac-table-border;
+  }
+}
+
+ac-day {
+  .day-days-tile {
+    border-left: $ac-table-border;
+  }
+
+  .day-hour-slot-label {
+    color: $grey;
+  }
+
+  ac-event-list {
     border-left: $ac-table-border;
     border-bottom: $ac-table-border;
   }
@@ -88,7 +103,7 @@ ac-month {
     border-left: $ac-table-border;
   }
 
-  ac-month-day {
+  .month-day-wrapper {
     border-left: $ac-table-border;
     border-bottom: $ac-table-border;
   }

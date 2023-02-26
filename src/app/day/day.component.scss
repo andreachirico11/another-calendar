@@ -1,0 +1,13 @@
+@import '../../styles/utils.scss';
+
+$first-row-height: 70px;
+$first-row-width: 70px;
+$auto-rows: 4em;
+
+:host {
+  display: flex;
+
+  @include col-1-mixin($first-row-width, $first-row-height, $auto-rows);
+
+  @include col-2-mixin($first-row-width, $first-row-height, $auto-rows);
+}

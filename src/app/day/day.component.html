@@ -1,1 +1,22 @@
-<p>ac-day works!</p>
+<div class="col-1">
+    <div class="first-slot"></div>
+    <div class="hours">
+        <div *ngFor="let _ of mockHoursSlots; index as i" class="hour-slot">
+            <div class="hour-slot-label">
+                {{getHourLabel(i)}}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-2">
+    <div class="col-2-header">
+        <div class="col-2-tile">
+            <p>mon</p>
+            <p>27</p>
+        </div>
+    </div>
+    <div class="col-2-grid">
+        <ac-event-list
+            *ngFor="let _ of mockHoursSlots; index as i"></ac-event-list>
+    </div>
+</div>
