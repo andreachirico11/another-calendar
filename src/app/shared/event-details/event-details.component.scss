@@ -1,0 +1,19 @@
+:host {
+  width: auto;
+  max-width: 600px;
+  min-width: 300px;
+  display: block;
+}
+
+mat-toolbar {
+  font-size: 2em;
+}
+
+.dialog-content {
+  padding: 1em;
+
+  div {
+    max-height: 30em;
+    overflow: hidden scroll;
+  }
+}

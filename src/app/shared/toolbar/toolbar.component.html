@@ -1,7 +1,8 @@
 <mat-toolbar color="primary">
-    <span>Another Calendar</span>
+    <span (click)="goHome()">Another Calendar</span>
     <span class="spacer"></span>
-    <mat-form-field ac-mat-form-field-without-error appearance="outline">
+    <mat-form-field *ngIf="showSelect" ac-mat-form-field-without-error
+        appearance="outline">
         <mat-select [ngModel]="selectedRoute"
             (ngModelChange)="onChange($event)">
             <mat-option *ngFor="let route of routes" [value]="route">

@@ -1,11 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
 import { Routes, RoutesArray, RoutesType } from '../../types';
-
-function isNav(e: any): e is NavigationEnd {
-  return e instanceof NavigationEnd;
-}
 
 @Component({
   selector: 'ac-nav',
@@ -16,9 +12,13 @@ export class ToolbarComponent implements OnDestroy {
   selectedRoute: RoutesType = Routes.month;
   routes: RoutesType[] = RoutesArray;
 
+  get showSelect() {
+    return this.routes.includes(this.selectedRoute);
+  }
+
   private sub: Subscription;
 
-  constructor(private router: Router, private route: ActivatedRoute) {
+  constructor(private router: Router) {
     this.sub = this.router.events.pipe(filter((e) => e instanceof NavigationEnd)).subscribe((e) => {
       if (e instanceof NavigationEnd) {
         this.selectedRoute = this.routes.find((route) => {
@@ -27,6 +27,10 @@ export class ToolbarComponent implements OnDestroy {
         })!;
       }
     });
+  }
+
+  goHome() {
+    this.router.navigate([Routes.month]);
   }
 
   ngOnDestroy() {

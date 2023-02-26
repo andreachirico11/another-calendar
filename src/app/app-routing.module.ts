@@ -16,6 +16,7 @@ const routes: Routes = [
     redirectTo: 'month',
     pathMatch: 'full',
   },
+  { path: 'event', loadChildren: () => import('./event/event.module').then(m => m.EventModule) },
 ];
 
 @NgModule({
