@@ -10,7 +10,7 @@ const routes: Routes = [
     path: 'week',
     loadChildren: () => import('./week/week.module').then((m) => m.WeekModule),
   },
-  { path: 'day', loadChildren: () => import('./day/ac-day.module').then((m) => m.DayModule) },
+  { path: 'day', loadChildren: () => import('./day/day.module').then((m) => m.DayModule) },
   {
     path: '',
     redirectTo: 'month',

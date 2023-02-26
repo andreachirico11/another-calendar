@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { MonthComponent } from './month.component';
 import { RouterModule } from '@angular/router';
 
-import { MatGridListModule } from '@angular/material/grid-list';
 import { MonthDayComponent } from './month-day/month-day.component';
 import { SharedModule } from '../shared/shared.module';
 import { MaterialModule } from '../shared/material.module';
@@ -14,7 +13,6 @@ import { MaterialModule } from '../shared/material.module';
   imports: [
     CommonModule,
     SharedModule,
-    MatGridListModule,
     MaterialModule,
     RouterModule.forChild([{ path: '', component: MonthComponent }]),
   ],

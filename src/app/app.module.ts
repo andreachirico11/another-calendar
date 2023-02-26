@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { WeekModule } from './week/week.module';
-import { DayModule } from './day/ac-day.module';
+import { DayModule } from './day/day.module';
 import { MonthModule } from './month/month.module';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';

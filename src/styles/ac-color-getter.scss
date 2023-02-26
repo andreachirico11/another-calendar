@@ -1,9 +1,12 @@
 @import '@angular/material/theming';
 
 @function ac-color-getter($theme, $colorName) {
+  @if ($colorName == 'grey') {
+    @return grey;
+  }
+
   @if ($colorName == 'white') {
     @return white;
   }
-
-  @return white;
+  @return red;
 }

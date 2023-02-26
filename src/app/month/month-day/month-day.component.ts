@@ -13,11 +13,4 @@ export interface ChipColor {
 })
 export class MonthDayComponent {
   @Input() mockNumber: number | null = null;
-
-  availableColors: ChipColor[] = [
-    { name: 'none', color: undefined },
-    { name: 'Primary', color: 'primary' },
-    { name: 'Accent', color: 'accent' },
-    { name: 'Warn', color: 'warn' },
-  ];
 }

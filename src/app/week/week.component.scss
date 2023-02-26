@@ -1,0 +1,67 @@
+$first-row-height: 70px;
+$first-row-width: 70px;
+$auto-rows: 10em;
+
+@mixin weekGrid() {
+  display: grid;
+  height: calc(100% - $first-row-height);
+  grid-auto-rows: $auto-rows;
+}
+
+:host {
+  display: flex;
+
+  .col-1 {
+    width: $first-row-width;
+
+    .first-slot {
+      height: $first-row-height;
+    }
+
+    .week-hours {
+      @include weekGrid();
+
+      .week-hour-slot {
+        position: relative;
+
+        .week-hour-slot-label {
+          position: absolute;
+          left: 1em;
+          font-size: 1em;
+          text-transform: uppercase;
+          top: calc($auto-rows - 0.6em);
+        }
+      }
+    }
+  }
+
+  .col-2 {
+    width: calc(100% - $first-row-width);
+
+    .week-days {
+      height: $first-row-height;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+
+      .week-days-tile {
+        text-transform: uppercase;
+        text-align: center;
+        line-height: 2em;
+
+        p {
+          font-size: 0.8em;
+          margin: 0;
+
+          &:nth-of-type(2) {
+            font-size: 1.5em;
+          }
+        }
+      }
+    }
+
+    .week-grid {
+      @include weekGrid();
+      grid-template-columns: repeat(7, minmax(50px, 1fr));
+    }
+  }
+}

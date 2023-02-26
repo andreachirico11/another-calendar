@@ -1,12 +1,3 @@
-mat-grid-list .mat-grid-list .days {
-  padding-bottom: calc(100% - 50px) !important;
-
-  mat-grid-tile .mat-grid-tile-content {
-    align-items: start !important;
-    justify-content: left !important;
-  }
-}
-
 .month-days {
   height: 50px;
   display: grid;
@@ -16,7 +7,6 @@ mat-grid-list .mat-grid-list .days {
     text-transform: uppercase;
     text-align: center;
     line-height: 3em;
-    border-left: 0.1em solid grey;
   }
 }
 

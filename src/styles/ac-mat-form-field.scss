@@ -1,7 +1,7 @@
 @import 'ac-color-getter';
 
 @mixin ac-mat-form-field($theme) {
-  $white: ac-color-getter($theme, white);
+  $white: ac-color-getter($theme, 'white');
 
   mat-form-field[ac-mat-form-field],
   mat-form-field[ac-mat-form-field-without-error] {

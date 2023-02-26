@@ -58,12 +58,38 @@ ul {
   padding: 0;
 }
 
-$foreground: map-get($another-calendar-theme, foreground);
-$foreground-text: map-get($foreground, text);
-
 ac-event-chip {
   mat-card {
     background-color: material-color-getter($another-calendar-theme, primary) !important;
-    color: ac-color-getter($another-calendar-theme, white);
+    color: ac-color-getter($another-calendar-theme, 'white');
+  }
+}
+
+$grey: ac-color-getter($another-calendar-theme, 'grey');
+$ac-table-border: 0.1em solid $grey;
+
+ac-week {
+  .week-days-tile {
+    border-left: $ac-table-border;
+  }
+
+  .week-hour-slot-label {
+    color: $grey;
+  }
+
+  ac-week-day {
+    border-left: $ac-table-border;
+    border-bottom: $ac-table-border;
+  }
+}
+
+ac-month {
+  .mont-days-tile {
+    border-left: $ac-table-border;
+  }
+
+  ac-month-day {
+    border-left: $ac-table-border;
+    border-bottom: $ac-table-border;
   }
 }

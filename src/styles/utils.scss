@@ -1,0 +1,6 @@
+@mixin vertical-only-scroll() {
+  overflow: hidden scroll;
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+}
