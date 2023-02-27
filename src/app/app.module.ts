@@ -11,13 +11,14 @@ import { MonthModule } from './month/month.module';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
 import { MaterialModule } from './shared/material.module';
+import reducers from './reducers';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot(reducers),
     BrowserAnimationsModule,
     WeekModule,
     DayModule,

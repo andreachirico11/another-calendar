@@ -2,7 +2,10 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DateToolsService } from 'shared/date-tools-service/date-tools.service';
+import { Store } from '@ngrx/store';
+import { DateToolsService } from 'src/app/shared/date-tools-service/date-tools.service';
+import { AppState } from '../reducers';
+import { CreateEvent } from '../reducers/events';
 import { OperationMode } from '../types';
 
 @Component({
@@ -33,7 +36,8 @@ export class EventComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private dateTools: DateToolsService,
-    private location: Location
+    private location: Location,
+    private store: Store<AppState>
   ) {
     this._mode = this.route.snapshot.data['mode'];
     this._eventId = this.newMode
@@ -53,6 +57,10 @@ export class EventComponent implements OnInit {
     this.location.back();
   }
 
+  onSubmit() {
+    this.store.dispatch(CreateEvent({ newEvent: this.form.value }));
+  }
+
   private createForm() {
     return this.fb.group({
       title: this.fb.control(null),
@@ -61,11 +69,13 @@ export class EventComponent implements OnInit {
       endDate: this.fb.control(null),
       endTime: this.fb.control(null),
       content: this.fb.control(null),
+      _id: this.fb.control(null),
     });
   }
 
   private prefillForm() {
     this.form.setValue({
+      _id: '',
       title: 'Mega Event',
       startDate: new Date('2004-11-11'),
       endDate: new Date('2009-12-12'),

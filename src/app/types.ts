@@ -33,18 +33,20 @@ export enum OperationMode {
   new = 'new',
 }
 
-export interface CalendarEvent {
+interface CalendarEventShared {
+  _id: string;
   title: string;
-  startDateTime: Date;
-  endDateTime: Date;
   content: string;
 }
 
-export interface FormCalendarEvent {
-  title: string;
+export interface CalendarEvent extends CalendarEventShared {
+  startDateTime: Date;
+  endDateTime: Date;
+}
+
+export interface FormCalendarEvent extends CalendarEventShared {
   startDate: Date;
   endDate: Date;
   startTime: string;
   endTime: string;
-  content: string;
 }
