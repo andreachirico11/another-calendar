@@ -1,13 +1,12 @@
-<ac-nav></ac-nav>
+<ac-nav (toggledMenu)="onToggled()"
+    [disabledButton]="drawerMode === 'side'"></ac-nav>
 <mat-drawer-container autosize>
-    <mat-drawer #drawer mode="side" [opened]="true" class="ac-drawer">
+    <mat-drawer #drawer [mode]="drawerMode" [opened]="drawerOpened"
+        class="ac-drawer">
         <div class="mat-drawer-inner">
-
             <button mat-fab extended color="primary" routerLink="event/new">
                 <mat-icon>add</mat-icon>
-                <h3>
-                    Create
-                </h3>
+                <h3>Create</h3>
             </button>
             <mat-calendar></mat-calendar>
         </div>

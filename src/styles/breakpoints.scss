@@ -1,0 +1,13 @@
+@mixin devices($breakpoint) {
+  @if ($breakpoint == 'mobile') {
+    @media only screen and (max-width: 767px) {
+      @content;
+    }
+  }
+
+  @if ($breakpoint == 'mobile-rotated') {
+    @media only screen and (max-width: 767px) and (orientation: portrait) {
+      @content;
+    }
+  }
+}

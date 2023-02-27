@@ -1,3 +1,5 @@
+@import './breakpoints.scss';
+
 @mixin vertical-only-scroll() {
   overflow: hidden scroll;
   &::-webkit-scrollbar {
@@ -14,6 +16,7 @@
 @mixin col-1-mixin($first-row-width, $first-row-height, $auto-rows) {
   .col-1 {
     width: $first-row-width;
+    min-width: $first-row-width;
 
     .first-slot {
       height: $first-row-height;
@@ -31,6 +34,11 @@
           font-size: 1em;
           text-transform: uppercase;
           top: calc($auto-rows - 0.6em);
+
+          @include devices('mobile') {
+            transform: rotate(270deg);
+            left: -0.5em;
+          }
         }
       }
     }
@@ -40,6 +48,7 @@
 @mixin col-2-mixin($first-row-width, $first-row-height, $auto-rows) {
   .col-2 {
     width: calc(100% - $first-row-width);
+    min-width: 370px;
 
     .col-2-header {
       height: $first-row-height;

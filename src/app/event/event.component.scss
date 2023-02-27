@@ -1,5 +1,8 @@
+@import '../../styles/breakpoints.scss';
+
 mat-card {
   width: 60%;
+  min-width: 630px;
   margin: 5em auto;
   padding: 2em 0;
 
@@ -40,6 +43,36 @@ mat-card {
     button {
       font-size: 1.5em;
       padding: 1em 2em;
+    }
+  }
+}
+
+@include devices('mobile') {
+  mat-card {
+    width: 80%;
+    min-width: 300px;
+
+    mat-card-title {
+      mat-form-field {
+        font-size: 1.75em;
+      }
+    }
+
+    mat-card-content {
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(3, 1fr);
+
+      :nth-child(5) {
+        grid-row: span 2;
+        grid-column: 1;
+      }
+    }
+
+    mat-card-actions {
+      button {
+        font-size: 1.2em;
+        padding: 0.5em 1.3em;
+      }
     }
   }
 }

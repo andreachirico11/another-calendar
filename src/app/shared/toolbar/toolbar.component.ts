@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
 import { Routes, RoutesArray, RoutesType } from '../../types';
@@ -11,12 +11,15 @@ import { Routes, RoutesArray, RoutesType } from '../../types';
 export class ToolbarComponent implements OnDestroy {
   selectedRoute: RoutesType = Routes.month;
   routes: RoutesType[] = RoutesArray;
+  @Input() disabledButton = false;
 
   get showSelect() {
     return this.routes.includes(this.selectedRoute);
   }
 
   private sub: Subscription;
+
+  @Output() toggledMenu = new EventEmitter<null>();
 
   constructor(private router: Router) {
     this.sub = this.router.events.pipe(filter((e) => e instanceof NavigationEnd)).subscribe((e) => {

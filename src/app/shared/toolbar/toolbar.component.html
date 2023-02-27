@@ -1,4 +1,8 @@
 <mat-toolbar color="primary">
+    <button mat-icon-button color="accent" [disabled]="disabledButton"
+        (click)="toggledMenu.emit()">
+        <mat-icon>menu</mat-icon>
+    </button>
     <span (click)="goHome()">Another Calendar</span>
     <span class="spacer"></span>
     <mat-form-field *ngIf="showSelect" ac-mat-form-field-without-error

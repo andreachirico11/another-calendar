@@ -1,32 +1,37 @@
-.month-days {
-  height: 50px;
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
+:host {
+  min-width: 360px;
+  display: block;
 
-  .mont-days-tile {
-    text-transform: uppercase;
-    text-align: center;
-    line-height: 2em;
-  }
-}
+  .month-days {
+    height: 50px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
 
-.month-grid {
-  height: calc(100% - 50px);
-  display: grid;
-  grid-template-columns: repeat(7, minmax(50px, 1fr));
-  grid-auto-rows: 13em;
-
-  .month-day-wrapper {
-    padding: 0.3em 0;
-
-    .month-day-header {
+    .mont-days-tile {
+      text-transform: uppercase;
       text-align: center;
-      height: 1em;
+      line-height: 2em;
     }
+  }
 
-    ac-event-list {
-      display: block;
-      height: calc(100% - 3em);
+  .month-grid {
+    height: calc(100% - 50px);
+    display: grid;
+    grid-template-columns: repeat(7, minmax(50px, 1fr));
+    grid-auto-rows: 13em;
+
+    .month-day-wrapper {
+      padding: 0.3em 0;
+
+      .month-day-header {
+        text-align: center;
+        height: 1em;
+      }
+
+      ac-event-list {
+        display: block;
+        height: calc(100% - 3em);
+      }
     }
   }
 }

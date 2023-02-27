@@ -1,4 +1,5 @@
 @import '../../styles/utils.scss';
+@import '../../styles/breakpoints.scss';
 
 $first-row-height: 70px;
 $first-row-width: 70px;
@@ -18,5 +19,15 @@ $auto-rows: 10em;
     .col-2-grid {
       grid-template-columns: repeat(7, minmax(50px, 1fr));
     }
+  }
+}
+
+@include devices('mobile') {
+  $first-row-width: 40px;
+
+  :host {
+    @include col-1-mixin($first-row-width, $first-row-height, $auto-rows);
+
+    @include col-2-mixin($first-row-width, $first-row-height, $auto-rows);
   }
 }

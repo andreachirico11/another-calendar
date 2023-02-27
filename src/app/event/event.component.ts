@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -31,7 +32,8 @@ export class EventComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
-    private dateTools: DateToolsService
+    private dateTools: DateToolsService,
+    private location: Location
   ) {
     this._mode = this.route.snapshot.data['mode'];
     this._eventId = this.newMode
@@ -45,6 +47,10 @@ export class EventComponent implements OnInit {
     if (this.editMode && this._eventId) {
       this.prefillForm();
     }
+  }
+
+  back() {
+    this.location.back();
   }
 
   private createForm() {
