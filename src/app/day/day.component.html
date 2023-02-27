@@ -1,9 +1,9 @@
-<div class="col-1">
+<div class="col-1" *ngIf="!isLoading">
     <div class="first-slot"></div>
     <div class="hours">
-        <div *ngFor="let _ of mockHoursSlots; index as i" class="hour-slot">
+        <div *ngFor="let hour of dayHours; index as i" class="hour-slot">
             <div class="hour-slot-label">
-                {{getHourLabel(i)}}
+                {{ hour | date: 'h aa' }}
             </div>
         </div>
     </div>
@@ -11,12 +11,13 @@
 <div class="col-2">
     <div class="col-2-header">
         <div class="col-2-tile">
-            <p>{{ selectedDate | async | date: 'ccc' }}</p>
-            <p>{{ selectedDate | async | date: 'd' }}</p>
+            <p>{{ selectedDate | date: 'ccc' }}</p>
+            <p>{{ selectedDate | date: 'd' }}</p>
         </div>
     </div>
     <div class="col-2-grid">
-        <ac-event-list
-            *ngFor="let _ of mockHoursSlots; index as i"></ac-event-list>
+        <ac-event-list *ngFor="let startHour of dayHours; index as i"
+            [startDate]="startHour" [endDate]="getSlotEndHour(i)">
+        </ac-event-list>
     </div>
 </div>

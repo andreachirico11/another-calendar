@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { map, Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AppState } from 'src/app/reducers';
 import { StateSelectors } from 'src/app/reducers/state';
 import { CalendarEvent } from 'src/app/types';
@@ -10,10 +10,15 @@ import { CalendarEvent } from 'src/app/types';
   templateUrl: './event-list.component.html',
   styleUrls: ['./event-list.component.scss'],
 })
-export class EventListComponent {
-  events: Observable<CalendarEvent[]>;
+export class EventListComponent implements OnInit {
+  @Input() startDate!: Date;
+  @Input() endDate!: Date;
 
-  constructor(private store: Store<AppState>) {
-    this.events = this.store.pipe(StateSelectors.simpleSel);
+  events!: Observable<CalendarEvent[]>;
+
+  constructor(private store: Store<AppState>) {}
+
+  ngOnInit() {
+    this.events = this.store.pipe(StateSelectors.selectedDateEvents(this.startDate, this.endDate));
   }
 }

@@ -36,12 +36,37 @@ export class DateToolsService {
     };
   }
 
+  static isInRange(e: CalendarEvent, startDate: Date, endDate: Date) {
+    const { startDateTime, endDateTime } = e;
+    const startEvent = startDateTime.getTime(),
+      endEvent = endDateTime.getTime();
+    const rangeStart = startDate.getTime(),
+      rangeEnd = endDate.getTime();
+    return (
+      (rangeStart <= startEvent && startEvent < rangeEnd) ||
+      (rangeStart <= endEvent && endEvent < rangeEnd) ||
+      (startEvent <= rangeStart && rangeEnd < endEvent)
+    );
+  }
+
   constructor() {}
 
   getHoursValues() {
     const hours = this.getHours();
     const hoursWithMinutes = this.addMinutes(hours);
     const output = [...this.addAmPm(hoursWithMinutes, AM), ...this.addAmPm(hoursWithMinutes, PM)];
+    return output;
+  }
+
+  getDayHoursArray(date: Date): Date[] {
+    let actualHour = 0;
+    const output = [];
+    while (actualHour < 24) {
+      const newD = new Date(date.toISOString());
+      newD.setHours(actualHour, 0, 0, 0);
+      output.push(newD);
+      actualHour++;
+    }
     return output;
   }
 

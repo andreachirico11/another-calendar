@@ -28,9 +28,6 @@ export class EventComponent implements OnInit {
     return this._mode === OperationMode.new;
   }
 
-  // FORMAT TO THIS
-  // 2025-11-11 12:15 AM
-
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -80,8 +77,8 @@ export class EventComponent implements OnInit {
     this.form.setValue({
       _id: '',
       title: 'Mega Event',
-      startDate: new Date('2004-11-11'),
-      endDate: new Date('2009-12-12'),
+      startDate: new Date('2023-02-27'),
+      endDate: new Date('2023-02-27'),
       startTime: '12:15 AM',
       endTime: '1:30 PM',
       content: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, iste ipsam qui at facere dignissimos expedita recusandae provident quos quidem, facilis omnis suscipit. Nam, facere rem? Accusantium animi consectetur, fugit eos architecto eius corporis officiis neque aut voluptatibus consequatur sapiente at excepturi quidem doloribus explicabo accusamus, autem debitis rerum! Distinctio recusandae cupiditate nobis, facere ab maxime eius assumenda quam provident expedita maiores placeat illo deserunt ipsa magnam corrupti, asperiores corporis delectus ratione aperiam. Maxime animi saepe atque blanditiis tempore, ea placeat inventore ipsam iusto accusantium earum fugit quo est, consectetur veniam non voluptatum in itaque necessitatibus molestiae recusandae? Amet, aspernatur?"`,

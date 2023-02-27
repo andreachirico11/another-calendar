@@ -58,8 +58,13 @@ export const StateSelectors = {
     return pipe(select((s: AppState) => s.state.selectedDate));
   },
 
-  get selectedDateEvents() {
-    // TODO filtrare
-    return this.simpleSel;
+  selectedDateEvents(startDate: Date, endDate: Date) {
+    return pipe(
+      select((s: AppState) =>
+        s.state.events.filter((e) => {
+          return DateToolsService.isInRange(e, startDate, endDate);
+        })
+      )
+    );
   },
 };

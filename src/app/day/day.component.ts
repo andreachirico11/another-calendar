@@ -1,28 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { AppState } from '../reducers';
 import { StateSelectors } from '../reducers/state';
+import { DateToolsService } from '../shared/date-tools-service/date-tools.service';
 
 @Component({
   selector: 'ac-day',
   templateUrl: './day.component.html',
   styleUrls: ['./day.component.scss'],
 })
-export class DayComponent {
-  mockHours = Array(7 * 24).fill('');
-  mockHoursSlots = Array(23).fill('');
+export class DayComponent implements OnDestroy, OnInit {
+  selectedDate!: Date;
+  dayHours: Date[] = [];
+  isLoading = true;
 
-  selectedDate: Observable<Date>;
+  private sub!: Subscription;
 
-  constructor(private store: Store<AppState>) {
-    this.selectedDate = this.store.pipe(StateSelectors.actualSelectedDate);
+  constructor(private store: Store<AppState>, private tool: DateToolsService) {}
+
+  ngOnInit() {
+    this.sub = this.store.pipe(StateSelectors.actualSelectedDate).subscribe((newSelectedDate) => {
+      this.selectedDate = newSelectedDate;
+      this.dayHours = this.tool.getDayHoursArray(this.selectedDate);
+      this.isLoading = false;
+    });
   }
 
-  getHourLabel(i: number) {
-    i = i + 1;
-    const amPm = i < 12 ? 'am' : 'pm';
-    i = i < 13 ? i : i - 12;
-    return `${i} ${amPm}`;
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
+
+  getSlotEndHour(startHourIndex: number) {
+    if (startHourIndex === this.dayHours.length - 1) {
+      return this.dayHours[0];
+    }
+    return this.dayHours[startHourIndex + 1];
   }
 }

@@ -1,5 +1,6 @@
 <mat-card (click)="openDialog()">
     <span>
-        {{event!.title}}
+        <b>{{event!.title}}</b> start at: {{event!.startDateTime | date: 'hh:mm
+        aa'}}, ends at: {{event!.endDateTime | date: 'hh:mm aa'}}
     </span>
 </mat-card>
