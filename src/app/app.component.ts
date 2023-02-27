@@ -1,5 +1,9 @@
 import { AfterViewInit, Component, HostListener } from '@angular/core';
 import { MatDrawerMode } from '@angular/material/sidenav';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { AppState } from './reducers';
+import { StateSelectors, UpdateSelectedDate } from './reducers/state';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +13,11 @@ import { MatDrawerMode } from '@angular/material/sidenav';
 export class AppComponent implements AfterViewInit {
   drawerOpened = false;
   drawerMode: MatDrawerMode = 'over';
+  selected: Observable<Date | null>;
+
+  constructor(private store: Store<AppState>) {
+    this.selected = this.store.pipe(StateSelectors.actualSelectedDate);
+  }
 
   @HostListener('window:resize', ['$event'])
   onResize() {
@@ -25,6 +34,10 @@ export class AppComponent implements AfterViewInit {
     if (this.drawerMode === 'over') {
       this.drawerOpened = !this.drawerOpened;
     }
+  }
+
+  onSelectedDateChange(newDate: Date) {
+    this.store.dispatch(UpdateSelectedDate({ newDate }));
   }
 
   private setupDrawer(innerWidth: number) {

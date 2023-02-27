@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { DateToolsService } from 'src/app/shared/date-tools-service/date-tools.service';
 import { AppState } from '../reducers';
-import { CreateEvent } from '../reducers/events';
+import { CreateEvent } from '../reducers/state';
 import { OperationMode } from '../types';
 
 @Component({
@@ -59,6 +59,9 @@ export class EventComponent implements OnInit {
 
   onSubmit() {
     this.store.dispatch(CreateEvent({ newEvent: this.form.value }));
+    setTimeout(() => {
+      this.back();
+    }, 100);
   }
 
   private createForm() {

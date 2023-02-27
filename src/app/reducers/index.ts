@@ -1,12 +1,12 @@
 import { ActionReducerMap } from '@ngrx/store';
-import { EventsState, eventsReducer } from './events';
+import { State, stateReducer } from './state';
 
 export interface AppState {
-  events: EventsState;
+  state: State;
 }
 
-const reducers: ActionReducerMap<{ events: EventsState }> = {
-  events: eventsReducer,
+const reducers: ActionReducerMap<AppState> = {
+  state: stateReducer,
 };
 
 export default reducers;

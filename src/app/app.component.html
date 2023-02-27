@@ -8,7 +8,8 @@
                 <mat-icon>add</mat-icon>
                 <h3>Create</h3>
             </button>
-            <mat-calendar></mat-calendar>
+            <mat-calendar [selected]="selected | async"
+                (selectedChange)="onSelectedDateChange($event)"></mat-calendar>
         </div>
     </mat-drawer>
     <router-outlet></router-outlet>
