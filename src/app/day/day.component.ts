@@ -21,6 +21,7 @@ export class DayComponent implements OnDestroy, OnInit {
 
   ngOnInit() {
     this.sub = this.store.pipe(StateSelectors.actualSelectedDate).subscribe((newSelectedDate) => {
+      this.isLoading = true;
       this.selectedDate = newSelectedDate;
       this.dayHours = this.tool.getDayHoursArray(this.selectedDate);
       this.isLoading = false;
@@ -33,7 +34,7 @@ export class DayComponent implements OnDestroy, OnInit {
 
   getSlotEndHour(startHourIndex: number) {
     if (startHourIndex === this.dayHours.length - 1) {
-      return this.dayHours[0];
+      return this.tool.getTheNextDay(this.dayHours[0]);
     }
     return this.dayHours[startHourIndex + 1];
   }

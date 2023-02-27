@@ -1,3 +1,7 @@
+<div *ngIf="debugMode">
+    <p>{{ startDate | date: 'short' }}</p>
+    <p>{{ endDate | date: 'short' }}</p>
+</div>
 <div>
     <ac-event-chip *ngFor="let e of events | async" [event]="e"></ac-event-chip>
 </div>

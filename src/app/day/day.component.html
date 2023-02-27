@@ -15,7 +15,7 @@
             <p>{{ selectedDate | date: 'd' }}</p>
         </div>
     </div>
-    <div class="col-2-grid">
+    <div class="col-2-list">
         <ac-event-list *ngFor="let startHour of dayHours; index as i"
             [startDate]="startHour" [endDate]="getSlotEndHour(i)">
         </ac-event-list>

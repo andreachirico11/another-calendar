@@ -1,45 +1,28 @@
-<div class="col-1">
-    <div class="first-slot"></div>
-    <div class="hours">
-        <div *ngFor="let _ of mockHoursSlots; index as i" class="hour-slot">
-            <div class="hour-slot-label">
-                {{getHourLabel(i)}}
+<ng-container *ngIf="!isLoading">
+    <div class="col-1">
+        <div class="first-slot"></div>
+        <div class="hours">
+            <div *ngFor="let hour of dayHours; index as i" class="hour-slot">
+                <div class="hour-slot-label">
+                    {{ hour | date: 'h aa' }}
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="col-2">
-    <div class="col-2-header">
-        <div class="col-2-tile">
-            <p>mon</p>
-            <p>27</p>
+    <div class="col-2">
+        <div class="col-2-header">
+            <div *ngFor="let day of weekDays" class="col-2-tile">
+                <p>{{ day | date:'EEE' }}</p>
+                <p>{{ day | date:'dd' }}</p>
+            </div>
         </div>
-        <div class="col-2-tile">
-            <p>tue</p>
-            <p>28</p>
-        </div>
-        <div class="col-2-tile">
-            <p>wed</p>
-            <p>29</p>
-        </div>
-        <div class="col-2-tile">
-            <p>thu</p>
-            <p>30</p>
-        </div>
-        <div class="col-2-tile">
-            <p>fri</p>
-            <p>31</p>
-        </div>
-        <div class="col-2-tile">
-            <p>sat</p>
-            <p>1</p>
-        </div>
-        <div class="col-2-tile">
-            <p>sun</p>
-            <p>2</p>
+        <div class="col-2-grid">
+            <div class="col-2-list" *ngFor="let weekDay of weekDays">
+                <ac-event-list *ngFor="let startHour of dayHours; index as i"
+                    [startDate]="mergeDayAndHour(weekDay, startHour)"
+                    [endDate]="mergeDayAndHour(updateIfLastDay(i, weekDay), getSlotEndHour(i))">
+                </ac-event-list>
+            </div>
         </div>
     </div>
-    <div class="col-2-grid">
-        <ac-event-list *ngFor="let _ of mockHours; index as i"></ac-event-list>
-    </div>
-</div>
+</ng-container>

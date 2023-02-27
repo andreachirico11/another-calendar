@@ -26,7 +26,7 @@ export class ToolbarComponent implements OnDestroy {
       if (e instanceof NavigationEnd) {
         this.selectedRoute = this.routes.find((route) => {
           const r = new RegExp(route);
-          return r.test(e.url);
+          return r.test(e.url) || r.test(e.urlAfterRedirects);
         })!;
       }
     });

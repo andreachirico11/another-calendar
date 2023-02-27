@@ -48,6 +48,9 @@ export class EventComponent implements OnInit {
     if (this.editMode && this._eventId) {
       this.prefillForm();
     }
+
+    // MOCK
+    // this.prefillForm();
   }
 
   back() {

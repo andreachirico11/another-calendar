@@ -5,6 +5,8 @@ import { AppState } from 'src/app/reducers';
 import { StateSelectors } from 'src/app/reducers/state';
 import { CalendarEvent } from 'src/app/types';
 
+const SHOW_TIMES_FOR_DEBUG = false;
+
 @Component({
   selector: 'ac-event-list',
   templateUrl: './event-list.component.html',
@@ -15,6 +17,10 @@ export class EventListComponent implements OnInit {
   @Input() endDate!: Date;
 
   events!: Observable<CalendarEvent[]>;
+
+  get debugMode() {
+    return SHOW_TIMES_FOR_DEBUG;
+  }
 
   constructor(private store: Store<AppState>) {}
 

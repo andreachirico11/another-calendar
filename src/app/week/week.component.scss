@@ -13,9 +13,19 @@ $auto-rows: 10em;
   @include col-2-mixin($first-row-width, $first-row-height, $auto-rows);
 
   .col-2 {
-    .col-2-header {
-      grid-template-columns: repeat(7, 1fr);
+    .col-2-grid {
+      display: grid;
+
+      > * {
+        min-width: 0px;
+
+        > * {
+          min-width: 0px;
+        }
+      }
     }
+
+    .col-2-header,
     .col-2-grid {
       grid-template-columns: repeat(7, minmax(50px, 1fr));
     }

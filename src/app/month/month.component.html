@@ -1,31 +1,17 @@
-<div class="month-days">
-    <div class="mont-days-tile">
-        mon
-    </div>
-    <div class="mont-days-tile">
-        tue
-    </div>
-    <div class="mont-days-tile">
-        wed
-    </div>
-    <div class="mont-days-tile">
-        thu
-    </div>
-    <div class="mont-days-tile">
-        fri
-    </div>
-    <div class="mont-days-tile">
-        sat
-    </div>
-    <div class="mont-days-tile">
-        sun
-    </div>
-</div>
-<div class="month-grid">
-    <div class="month-day-wrapper" *ngFor="let _ of mockDays; index as i">
-        <div class="month-day-header">
-            {{ i + 1 - (i >= 31 ? 31 : 0) }}
+<ng-container *ngIf="!isLoading">
+    <div class="month-days">
+        <div class="mont-days-tile" *ngFor="let day of weekDays">
+            <p>{{ day | date:'EEE' }}</p>
         </div>
-        <ac-event-list></ac-event-list>
     </div>
-</div>
+    <div class="month-grid">
+        <div class="month-day-wrapper"
+            *ngFor="let day of squaredMonthDays; index as i">
+            <div class="month-day-header">
+                {{ day.getDate() }}
+            </div>
+            <ac-event-list [startDate]="day"
+                [endDate]="getEndDate(day, i)"></ac-event-list>
+        </div>
+    </div>
+</ng-container>
