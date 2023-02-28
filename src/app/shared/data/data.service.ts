@@ -1,21 +1,32 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { delay, of, throwError } from 'rxjs';
+import { delay, map, of, tap, throwError } from 'rxjs';
 import { CalendarEvent } from 'src/app/types';
-
-const MOCK_DB: CalendarEvent[] = [];
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
+
+  allEvents() {
+    return this.http.get<CalendarEvent[]>('/assets/MOCK_DATA.json').pipe(
+      map((rawObjects) =>
+        rawObjects.map((rawOb) => ({
+          ...rawOb,
+          startDateTime: new Date(rawOb.startDateTime),
+          endDateTime: new Date(rawOb.endDateTime),
+        }))
+      ),
+      delay(2000)
+    );
+  }
 
   createEvent(e: CalendarEvent) {
     if ((e.title = 'error')) {
       return throwError(() => new Error());
     }
     const updated: CalendarEvent = { ...e, _id: randomId() };
-    MOCK_DB.push(updated);
     return of(updated).pipe(delay(1000));
   }
 }

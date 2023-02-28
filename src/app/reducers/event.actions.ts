@@ -39,3 +39,26 @@ export const onCreateEventFail = (state: State): State => {
     onError: true,
   };
 };
+
+export const StartLoadEvents = createAction('START_LOAD');
+
+export type StartLoadEventsType = ReturnType<typeof StartLoadEvents>;
+
+export const onStartLoadEvents = (state: State): State => {
+  return {
+    ...state,
+    isLoading: true,
+  };
+};
+
+export const EventsLoaded = createAction('EVENTS_LOADED', props<{ events: CalendarEvent[] }>());
+
+export type EventsLoadedType = ReturnType<typeof EventsLoaded>;
+
+export const onEventsLoaded = (state: State, action: EventsLoadedType): State => {
+  return {
+    ...state,
+    isLoading: false,
+    events: [...action.events],
+  };
+};

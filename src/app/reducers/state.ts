@@ -7,9 +7,13 @@ import {
   CreateEvent,
   CreateEventFail,
   CreateEventSuccess,
+  EventsLoaded,
   onCreateEvent,
   onCreateEventFail,
   onCreateEventSuccess,
+  onEventsLoaded,
+  onStartLoadEvents,
+  StartLoadEvents,
 } from './event.actions';
 import { onSelectedDateUpdate, UpdateSelectedDate } from './selectedDate-actions';
 import { ClearError, onClearError } from './shared.actions';
@@ -28,15 +32,15 @@ const initialState: State = {
   onError: false,
 };
 
-// REDUCER
-
 export const stateReducer = createReducer(
   initialState,
   on(CreateEvent, onCreateEvent),
   on(CreateEventSuccess, onCreateEventSuccess),
   on(CreateEventFail, onCreateEventFail),
   on(UpdateSelectedDate, onSelectedDateUpdate),
-  on(ClearError, onClearError)
+  on(ClearError, onClearError),
+  on(StartLoadEvents, onStartLoadEvents),
+  on(EventsLoaded, onEventsLoaded)
 );
 
 export const StateSelectors = {

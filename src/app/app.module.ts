@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { StoreModule } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { WeekModule } from './week/week.module';
 import { DayModule } from './day/day.module';
@@ -14,6 +14,14 @@ import { MaterialModule } from './shared/material.module';
 import reducers from './reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { StateEffects } from './reducers/state-effects';
+import { AppInitializerService } from './app-initializer.service';
+import { HttpClientModule } from '@angular/common/http';
+
+export function initializeApp(appInitService: AppInitializerService) {
+  return (): Promise<any> => {
+    return appInitService.Init();
+  };
+}
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,8 +37,17 @@ import { StateEffects } from './reducers/state-effects';
     FormsModule,
     SharedModule,
     MaterialModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    AppInitializerService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeApp,
+      multi: true,
+      deps: [AppInitializerService, Store],
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
