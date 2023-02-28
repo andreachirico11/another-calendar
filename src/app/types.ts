@@ -25,7 +25,7 @@ export type DaysType = Values<typeof Days>;
 export const DaysArray: DaysType[] = Object.values(Days);
 
 export interface DetailsDialogData {
-  eventId: string;
+  event: CalendarEvent;
 }
 
 export enum OperationMode {

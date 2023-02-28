@@ -8,11 +8,17 @@
 
     align-items: center;
 
-    .spacer {
+    .actual-date {
       flex: 1 1 auto;
+      font-size: 1.3em;
+      display: inline-flex;
+      justify-content: center;
     }
 
     @include devices('mobile') {
+      .app-title {
+        display: none;
+      }
       mat-form-field {
         width: 10em;
         font-size: 0.75em;

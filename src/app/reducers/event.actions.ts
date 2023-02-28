@@ -28,6 +28,63 @@ export const onCreateEventSuccess = (state: State, action: CreateEventSuccessTyp
   };
 };
 
+export const UpdateEvent = createAction(
+  'UPDATE_EVENT',
+  props<{ updatedEvent: FormCalendarEvent }>()
+);
+
+export type UpdateEventType = ReturnType<typeof UpdateEvent>;
+
+export const onUpdateEvent = (state: State): State => {
+  return {
+    ...state,
+    isLoading: true,
+  };
+};
+
+export const UpdateEventSuccess = createAction(
+  'UPDATE_EVENT_SUCCESS',
+  props<{ eventUpdated: CalendarEvent }>()
+);
+
+export type UpdateEventSuccessType = ReturnType<typeof UpdateEventSuccess>;
+
+export const onUpdateEventSuccess = (state: State, action: UpdateEventSuccessType): State => {
+  const index = state.events.findIndex((ev) => ev._id === action.eventUpdated._id);
+  const events = [
+    ...state.events.slice(0, index),
+    { ...action.eventUpdated },
+    ...state.events.slice(index + 1),
+  ];
+  return { ...state, isLoading: false, events };
+};
+
+export const DeleteEvent = createAction('DELETE_EVENT', props<{ eventId: string }>());
+
+export type DeleteEventType = ReturnType<typeof DeleteEvent>;
+
+export const onDeleteEvent = (state: State): State => {
+  return {
+    ...state,
+    isLoading: true,
+  };
+};
+
+export const DeleteEventSuccess = createAction(
+  'DELETE_EVENT_SUCCESS',
+  props<{ eventId: string }>()
+);
+
+export type DeleteEventSuccessType = ReturnType<typeof DeleteEventSuccess>;
+
+export const onDeleteEventSuccess = (state: State, action: DeleteEventSuccessType): State => {
+  return {
+    ...state,
+    isLoading: false,
+    events: state.events.filter((e) => e._id !== action.eventId),
+  };
+};
+
 export const CreateEventFail = createAction('CREATE_EVENT_FAIL');
 
 export type CreateEventFailType = ReturnType<typeof CreateEventFail>;

@@ -1,7 +1,15 @@
 import { Injectable } from '@angular/core';
 import { CalendarEvent, FormCalendarEvent } from 'src/app/types';
 
-const MINUTE_VALUES = ['00', '15', '30', 45];
+const MINUTE_VALUES = ['00', '15', '30', '45'];
+
+const MINUTE_INTERVALS = MINUTE_VALUES.map((value, i) => {
+  const valueNum: number = Number(value);
+  return {
+    lowerLimit: valueNum,
+    upperLimit: Number(i === MINUTE_VALUES.length - 1 ? 60 : MINUTE_VALUES[i + 1]),
+  };
+});
 
 const AM = 'AM',
   PM = 'PM';
@@ -53,6 +61,14 @@ export class DateToolsService {
       (rangeStart <= endEvent && endEvent < rangeEnd) ||
       (startEvent <= rangeStart && rangeEnd < endEvent)
     );
+  }
+
+  static getTheNextMonth(d: Date) {
+    return new Date(d.getFullYear(), d.getMonth() + 1, d.getDate(), d.getHours(), d.getMinutes());
+  }
+
+  static getThePrevMonth(d: Date) {
+    return new Date(d.getFullYear(), d.getMonth() - 1, d.getDate(), d.getHours(), d.getMinutes());
   }
 
   get weekDays() {
@@ -152,6 +168,28 @@ export class DateToolsService {
     return output;
   }
 
+  getAmPmHour(d: Date) {
+    const hour = d.getHours(),
+      minutes = d.getMinutes(),
+      amOrPm = hour > 12 ? PM : AM;
+    let stringHour = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
+    let parsedMinutes = this.minuteParser(minutes);
+    if (parsedMinutes === 60) {
+      parsedMinutes = 0;
+      stringHour++;
+    }
+    return `${stringHour}:${this.padWithZero(parsedMinutes)} ${amOrPm}`;
+  }
+
+  private minuteParser(minutes: number) {
+    const interval = MINUTE_INTERVALS.find(
+      ({ lowerLimit, upperLimit }) => lowerLimit <= minutes && minutes < upperLimit
+    )!;
+    const lowerDifference = minutes - interval.lowerLimit,
+      upperDifference = interval?.upperLimit - minutes;
+    return lowerDifference < upperDifference ? interval.lowerLimit : interval.upperLimit;
+  }
+
   private getHours() {
     return Array(12)
       .fill(null)
@@ -166,5 +204,10 @@ export class DateToolsService {
 
   private addAmPm(hoursWithMinutes: string[], amOrPm: typeof AM | typeof PM) {
     return hoursWithMinutes.map((hm, i) => `${hm} ${amOrPm}`);
+  }
+
+  private padWithZero(num: number) {
+    const str = num.toString();
+    return str.length > 1 ? str : '0' + str;
   }
 }

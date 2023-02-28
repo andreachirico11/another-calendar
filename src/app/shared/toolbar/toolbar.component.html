@@ -3,8 +3,12 @@
         (click)="toggledMenu.emit()">
         <mat-icon>menu</mat-icon>
     </button>
-    <span (click)="goHome()">Another Calendar</span>
-    <span class="spacer"></span>
+    <span class="app-title" (click)="goHome()">Another Calendar</span>
+    <span class="actual-date" (click)="goHome()">
+        <mat-icon (click)="onArrowClick('prev', $event)">arrow_left</mat-icon>
+        {{ selectedDate | async | date:dateFormat }}
+        <mat-icon (click)="onArrowClick('next', $event)">arrow_right</mat-icon>
+    </span>
     <mat-form-field *ngIf="showSelect" ac-mat-form-field-without-error
         appearance="outline">
         <mat-select [ngModel]="selectedRoute"

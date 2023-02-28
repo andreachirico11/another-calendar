@@ -7,15 +7,28 @@ import {
   CreateEvent,
   CreateEventFail,
   CreateEventSuccess,
+  DeleteEvent,
+  DeleteEventSuccess,
   EventsLoaded,
   onCreateEvent,
   onCreateEventFail,
   onCreateEventSuccess,
+  onDeleteEvent,
+  onDeleteEventSuccess,
   onEventsLoaded,
   onStartLoadEvents,
+  onUpdateEvent,
+  onUpdateEventSuccess,
   StartLoadEvents,
+  UpdateEvent,
+  UpdateEventSuccess,
 } from './event.actions';
-import { onSelectedDateUpdate, UpdateSelectedDate } from './selectedDate-actions';
+import {
+  NextOrPrevSelectedDate,
+  onNextOrPrevSelectedDate,
+  onSelectedDateUpdate,
+  UpdateSelectedDate,
+} from './selectedDate-actions';
 import { ClearError, onClearError } from './shared.actions';
 
 export interface State {
@@ -38,9 +51,14 @@ export const stateReducer = createReducer(
   on(CreateEventSuccess, onCreateEventSuccess),
   on(CreateEventFail, onCreateEventFail),
   on(UpdateSelectedDate, onSelectedDateUpdate),
+  on(NextOrPrevSelectedDate, onNextOrPrevSelectedDate),
   on(ClearError, onClearError),
   on(StartLoadEvents, onStartLoadEvents),
-  on(EventsLoaded, onEventsLoaded)
+  on(EventsLoaded, onEventsLoaded),
+  on(UpdateEvent, onUpdateEvent),
+  on(UpdateEventSuccess, onUpdateEventSuccess),
+  on(DeleteEvent, onDeleteEvent),
+  on(DeleteEventSuccess, onDeleteEventSuccess)
 );
 
 export const StateSelectors = {

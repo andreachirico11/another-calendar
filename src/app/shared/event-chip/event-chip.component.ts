@@ -10,12 +10,14 @@ import { EventDetailsComponent } from '../event-details/event-details.component'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EventChipComponent {
-  @Input() event: CalendarEvent | undefined;
+  @Input() event!: CalendarEvent;
 
   constructor(public dialog: MatDialog) {}
 
-  openDialog() {
-    const data: DetailsDialogData = { eventId: 'pippo' };
+  openDialog(e: Event) {
+    e.preventDefault();
+    e.stopPropagation();
+    const data: DetailsDialogData = { event: this.event };
     this.dialog.open(EventDetailsComponent, { data });
   }
 }

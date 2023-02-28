@@ -2,6 +2,6 @@
     <p>{{ startDate | date: 'short' }}</p>
     <p>{{ endDate | date: 'short' }}</p>
 </div>
-<div>
+<div (click)="onSlotClick()">
     <ac-event-chip *ngFor="let e of events | async" [event]="e"></ac-event-chip>
 </div>

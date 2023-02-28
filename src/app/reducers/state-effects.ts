@@ -6,14 +6,32 @@ import {
   CreateEventFail,
   CreateEventSuccess,
   CreateEventType,
+  DeleteEvent,
+  DeleteEventSuccess,
+  DeleteEventType,
   EventsLoaded,
   StartLoadEvents,
+  UpdateEvent,
+  UpdateEventSuccess,
+  UpdateEventType,
 } from './event.actions';
-import { catchError, concatMap, map, of } from 'rxjs';
+import { catchError, concatMap, map, of, tap } from 'rxjs';
 import { DateToolsService } from '../shared/date-tools-service/date-tools.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class StateEffects {
+  initialLoadEvent$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(StartLoadEvents),
+      concatMap(() => {
+        return this.data.allEvents();
+      }),
+      map((events) => EventsLoaded({ events })),
+      catchError((_) => of(CreateEventFail()))
+    );
+  });
+
   createEvent$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CreateEvent),
@@ -26,16 +44,32 @@ export class StateEffects {
     );
   });
 
-  initialLoadEvent$ = createEffect(() => {
+  updateEvent$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(StartLoadEvents),
-      concatMap(() => {
-        return this.data.allEvents();
+      ofType(UpdateEvent),
+      concatMap(({ updatedEvent }: UpdateEventType) => {
+        const parsed = DateToolsService.toCalendarEvent(updatedEvent);
+        return this.data.updateEvent(parsed);
       }),
-      map((events) => EventsLoaded({ events })),
+      map((eventUpdated) => UpdateEventSuccess({ eventUpdated })),
+      tap(() => {
+        this.router.navigate(['/']);
+      }),
       catchError((_) => of(CreateEventFail()))
     );
   });
 
-  constructor(private actions$: Actions, private data: DataService) {}
+  deleteEvent$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DeleteEvent),
+      concatMap(({ eventId }: DeleteEventType) => this.data.deleteEvent(eventId)),
+      map((eventId) => DeleteEventSuccess({ eventId })),
+      tap(() => {
+        this.router.navigate(['/']);
+      }),
+      catchError((_) => of(CreateEventFail()))
+    );
+  });
+
+  constructor(private actions$: Actions, private data: DataService, private router: Router) {}
 }

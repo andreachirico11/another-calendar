@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from 'src/app/reducers';
@@ -22,9 +23,17 @@ export class EventListComponent implements OnInit {
     return SHOW_TIMES_FOR_DEBUG;
   }
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppState>, private router: Router) {}
 
   ngOnInit() {
     this.events = this.store.pipe(StateSelectors.selectedDateEvents(this.startDate, this.endDate));
+  }
+
+  onSlotClick() {
+    console.log('click');
+
+    this.router.navigate(['/event/new'], {
+      queryParams: { startDate: this.startDate.toISOString(), endDate: this.endDate.toISOString() },
+    });
   }
 }

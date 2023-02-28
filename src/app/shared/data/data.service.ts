@@ -23,11 +23,19 @@ export class DataService {
   }
 
   createEvent(e: CalendarEvent) {
-    if ((e.title = 'error')) {
+    if (e.title === 'error') {
       return throwError(() => new Error());
     }
     const updated: CalendarEvent = { ...e, _id: randomId() };
     return of(updated).pipe(delay(1000));
+  }
+
+  updateEvent(e: CalendarEvent) {
+    return of(e).pipe(delay(1000));
+  }
+
+  deleteEvent(id: string) {
+    return of(id).pipe(delay(1000));
   }
 }
 
