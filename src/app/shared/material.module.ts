@@ -12,6 +12,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { NativeDateAdapter } from '@angular/material/core';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Injectable()
 export class CustomDateAdapter extends NativeDateAdapter {
@@ -33,6 +34,7 @@ const modules = [
   MatGridListModule,
   MatDialogModule,
   MatInputModule,
+  MatProgressSpinnerModule,
 ];
 
 @NgModule({

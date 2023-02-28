@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
 import { MaterialModule } from './shared/material.module';
 import reducers from './reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { StateEffects } from './reducers/state-effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +21,7 @@ import reducers from './reducers';
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([StateEffects]),
     BrowserAnimationsModule,
     WeekModule,
     DayModule,

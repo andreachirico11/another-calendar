@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { DateToolsService } from 'src/app/shared/date-tools-service/date-tools.service';
 import { AppState } from '../reducers';
-import { CreateEvent } from '../reducers/state';
+import { CreateEvent } from '../reducers/event.actions';
 import { OperationMode } from '../types';
 
 @Component({

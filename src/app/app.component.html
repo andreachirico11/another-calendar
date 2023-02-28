@@ -14,3 +14,6 @@
     </mat-drawer>
     <router-outlet></router-outlet>
 </mat-drawer-container>
+<div class="spinner-overlay" *ngIf="appIsLoading | async">
+    <mat-spinner></mat-spinner>
+</div>
