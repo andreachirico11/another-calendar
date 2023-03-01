@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
 import { MatDrawerMode } from '@angular/material/sidenav';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
@@ -6,44 +6,38 @@ import { AppState } from './reducers';
 import { UpdateSelectedDate } from './reducers/selectedDate-actions';
 import { ClearError } from './reducers/shared.actions';
 import { StateSelectors } from './reducers/state';
+import { MatDialog } from '@angular/material/dialog';
+import { ErrorDialogComponent } from './shared/error-dialog.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements AfterViewInit, OnInit, OnDestroy {
+export class AppComponent implements AfterViewInit, OnInit {
   drawerOpened = false;
   drawerMode: MatDrawerMode = 'over';
 
   selected!: Observable<Date | null>;
   appIsLoading!: Observable<boolean>;
-
   errorSub!: Subscription;
 
-  constructor(private store: Store<AppState>) {}
-
-  @HostListener('window:resize', ['$event'])
-  onResize() {
-    this.setupDrawer(window.innerWidth);
-  }
+  constructor(private store: Store<AppState>, public dialog: MatDialog, public elR: ElementRef) {}
 
   ngOnInit() {
     this.selected = this.store.pipe(StateSelectors.actualSelectedDate);
     this.appIsLoading = this.store.pipe(StateSelectors.isLoading);
-    this.errorSub = this.store.pipe(StateSelectors.isOnError).subscribe((isAppOnError) => {
-      this.onErr(isAppOnError);
-    });
   }
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.setupDrawer(window.innerWidth);
+      this.setupDrawer(this.elR.nativeElement.offsetWidth);
+      this.errorSub = this.store.pipe(StateSelectors.isOnError).subscribe((isOn) => {
+        if (isOn) {
+          this.appIsOnError();
+        }
+      });
     }, 100);
-  }
-
-  ngOnDestroy() {
-    this.errorSub.unsubscribe();
   }
 
   onToggled() {
@@ -56,11 +50,14 @@ export class AppComponent implements AfterViewInit, OnInit, OnDestroy {
     this.store.dispatch(UpdateSelectedDate({ newDate }));
   }
 
-  onErr(on: boolean) {
-    if (on) {
-      alert('there was an error');
-      this.store.dispatch(ClearError());
-    }
+  appIsOnError() {
+    const ref = this.dialog
+      .open(ErrorDialogComponent)
+      .afterClosed()
+      .subscribe(() => {
+        ref.unsubscribe();
+        this.store.dispatch(ClearError());
+      });
   }
 
   private setupDrawer(innerWidth: number) {

@@ -27,8 +27,7 @@ export class StateEffects {
       concatMap(() => {
         return this.data.allEvents();
       }),
-      map((events) => EventsLoaded({ events })),
-      catchError((_) => of(CreateEventFail()))
+      map((events) => EventsLoaded({ events }))
     );
   });
 

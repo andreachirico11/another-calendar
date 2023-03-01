@@ -30,8 +30,6 @@ export class EventListComponent implements OnInit {
   }
 
   onSlotClick() {
-    console.log('click');
-
     this.router.navigate(['/event/new'], {
       queryParams: { startDate: this.startDate.toISOString(), endDate: this.endDate.toISOString() },
     });

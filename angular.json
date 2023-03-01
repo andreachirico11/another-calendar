@@ -137,7 +137,8 @@
           "builder": "@nguniversal/builders:prerender",
           "options": {
             "routes": [
-              "/"
+              "/",
+              "month"
             ]
           },
           "configurations": {

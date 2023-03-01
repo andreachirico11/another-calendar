@@ -16,6 +16,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StateEffects } from './reducers/state-effects';
 import { AppInitializerService } from './app-initializer.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ErrorDialogComponent } from './shared/error-dialog.component';
 
 export function initializeApp(appInitService: AppInitializerService) {
   return (): Promise<any> => {
@@ -24,7 +25,7 @@ export function initializeApp(appInitService: AppInitializerService) {
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ErrorDialogComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
