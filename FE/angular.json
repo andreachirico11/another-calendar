@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "another-calendar": {
+    "another-calendar-fe": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/another-calendar/browser",
+            "outputPath": "dist/another-calendar-fe/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "another-calendar:build:production"
+              "browserTarget": "another-calendar-fe:build:production"
             },
             "development": {
-              "browserTarget": "another-calendar:build:development"
+              "browserTarget": "another-calendar-fe:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "another-calendar:build"
+            "browserTarget": "another-calendar-fe:build"
           }
         },
         "test": {
@@ -101,7 +101,7 @@
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
-            "outputPath": "dist/another-calendar/server",
+            "outputPath": "dist/another-calendar-fe/server",
             "main": "server.ts",
             "tsConfig": "tsconfig.server.json",
             "inlineStyleLanguage": "scss"
@@ -123,12 +123,12 @@
           "builder": "@nguniversal/builders:ssr-dev-server",
           "configurations": {
             "development": {
-              "browserTarget": "another-calendar:build:development",
-              "serverTarget": "another-calendar:server:development"
+              "browserTarget": "another-calendar-fe:build:development",
+              "serverTarget": "another-calendar-fe:server:development"
             },
             "production": {
-              "browserTarget": "another-calendar:build:production",
-              "serverTarget": "another-calendar:server:production"
+              "browserTarget": "another-calendar-fe:build:production",
+              "serverTarget": "another-calendar-fe:server:production"
             }
           },
           "defaultConfiguration": "development"
@@ -143,12 +143,12 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "another-calendar:build:production",
-              "serverTarget": "another-calendar:server:production"
+              "browserTarget": "another-calendar-fe:build:production",
+              "serverTarget": "another-calendar-fe:server:production"
             },
             "development": {
-              "browserTarget": "another-calendar:build:development",
-              "serverTarget": "another-calendar:server:development"
+              "browserTarget": "another-calendar-fe:build:development",
+              "serverTarget": "another-calendar-fe:server:development"
             }
           },
           "defaultConfiguration": "production"

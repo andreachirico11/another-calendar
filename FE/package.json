@@ -7,10 +7,10 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "dev:ssr": "ng run another-calendar:serve-ssr",
-    "serve:ssr": "node dist/another-calendar/server/main.js",
-    "build:ssr": "ng build && ng run another-calendar:server",
-    "prerender": "ng run another-calendar:prerender"
+    "dev:ssr": "ng run another-calendar-fe:serve-ssr",
+    "serve:ssr": "node dist/another-calendar-fe/server/main.js",
+    "build:ssr": "ng build && ng run another-calendar-fe:server",
+    "prerender": "ng run another-calendar-fe:prerender"
   },
   "private": true,
   "dependencies": {
