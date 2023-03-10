@@ -9,7 +9,10 @@
                 <h3>Create</h3>
             </button>
             <mat-calendar [selected]="selected | async"
-                (selectedChange)="onSelectedDateChange($event)"></mat-calendar>
+                (selectedChange)="onSelectedDateChange($event)">
+            </mat-calendar>
+            <span *ngIf="!configs.production" class="version">version:
+                {{configs.version}}</span>
         </div>
     </mat-drawer>
     <router-outlet></router-outlet>

@@ -15,8 +15,9 @@ import reducers from './reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { StateEffects } from './reducers/state-effects';
 import { AppInitializerService } from './app-initializer.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ErrorDialogComponent } from './shared/error-dialog.component';
+import { SharedEffects } from './reducers/shared-effects';
 
 export function initializeApp(appInitService: AppInitializerService) {
   return (): Promise<any> => {
@@ -30,7 +31,7 @@ export function initializeApp(appInitService: AppInitializerService) {
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([StateEffects]),
+    EffectsModule.forRoot([StateEffects, SharedEffects]),
     BrowserAnimationsModule,
     WeekModule,
     DayModule,
@@ -46,7 +47,7 @@ export function initializeApp(appInitService: AppInitializerService) {
       provide: APP_INITIALIZER,
       useFactory: initializeApp,
       multi: true,
-      deps: [AppInitializerService, Store],
+      deps: [AppInitializerService, Store, HttpClient],
     },
   ],
   bootstrap: [AppComponent],

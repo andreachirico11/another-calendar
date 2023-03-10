@@ -50,3 +50,9 @@ export interface FormCalendarEvent extends CalendarEventShared {
   startTime: string;
   endTime: string;
 }
+
+export interface AppConfig {
+  version: string;
+  production: boolean;
+  apiUrl: string;
+}

@@ -7,6 +7,7 @@
   .mat-drawer-inner {
     height: 100%;
     padding: 0 1em;
+    position: relative;
 
     button {
       margin-top: 2em;
@@ -15,6 +16,13 @@
     mat-calendar {
       min-width: 12em;
       margin-top: 2em;
+    }
+
+    .version {
+      position: absolute;
+      bottom: 0.7em;
+      left: 0.7em;
+      font-size: 0.7em;
     }
   }
 

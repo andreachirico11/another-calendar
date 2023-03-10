@@ -8,6 +8,7 @@ import { ClearError } from './reducers/shared.actions';
 import { StateSelectors } from './reducers/state';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from './shared/error-dialog.component';
+import { AppConfig } from './types';
 
 @Component({
   selector: 'app-root',
@@ -21,12 +22,22 @@ export class AppComponent implements AfterViewInit, OnInit {
   selected!: Observable<Date | null>;
   appIsLoading!: Observable<boolean>;
   errorSub!: Subscription;
+  configs!: AppConfig;
 
   constructor(private store: Store<AppState>, public dialog: MatDialog, public elR: ElementRef) {}
 
   ngOnInit() {
     this.selected = this.store.pipe(StateSelectors.actualSelectedDate);
     this.appIsLoading = this.store.pipe(StateSelectors.isLoading);
+    this.store.pipe(StateSelectors.configs).subscribe((c) => {
+      this.configs = c;
+      if (!c.production) {
+        console.warn('----------------------');
+        console.warn('Connected with api on: ');
+        console.warn(c.apiUrl);
+        console.warn('-----------------------');
+      }
+    });
   }
 
   ngAfterViewInit() {

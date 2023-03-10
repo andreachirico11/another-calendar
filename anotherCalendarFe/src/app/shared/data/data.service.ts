@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { delay, map, of, tap, throwError } from 'rxjs';
-import { CalendarEvent } from 'src/app/types';
+import { delay, firstValueFrom, map, of, tap, throwError } from 'rxjs';
+import { AppConfig, CalendarEvent } from 'src/app/types';
 
 @Injectable({
   providedIn: 'root',
@@ -36,6 +36,15 @@ export class DataService {
 
   deleteEvent(id: string) {
     return of(id).pipe(delay(1000));
+  }
+
+  getAppConfig(url: string) {
+    return this.http.get<AppConfig & { _id: string }>(url + '/appConfig').pipe(
+      map((value) => {
+        const { _id, ...otherProps } = value;
+        return otherProps as AppConfig;
+      })
+    );
   }
 }
 

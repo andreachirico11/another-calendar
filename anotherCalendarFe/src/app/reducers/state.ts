@@ -1,8 +1,8 @@
 import { createReducer, on, select } from '@ngrx/store';
-import { pipe } from 'rxjs';
+import { first, pipe } from 'rxjs';
 import { AppState } from '.';
 import { DateToolsService } from '../shared/date-tools-service/date-tools.service';
-import { CalendarEvent } from '../types';
+import { AppConfig, CalendarEvent } from '../types';
 import {
   CreateEvent,
   CreateEventFail,
@@ -29,13 +29,21 @@ import {
   onSelectedDateUpdate,
   UpdateSelectedDate,
 } from './selectedDate-actions';
-import { ClearError, onClearError } from './shared.actions';
+import {
+  ClearError,
+  InitializationEnd,
+  InitializationStart,
+  onClearError,
+  onInitializationEnd,
+  onInitializationStart,
+} from './shared.actions';
 
 export interface State {
   events: CalendarEvent[];
   selectedDate: Date;
   isLoading: boolean;
   onError: boolean;
+  configs: AppConfig;
 }
 
 const initialState: State = {
@@ -43,6 +51,7 @@ const initialState: State = {
   selectedDate: new Date(),
   isLoading: false,
   onError: false,
+  configs: { version: '', production: true, apiUrl: '' },
 };
 
 export const stateReducer = createReducer(
@@ -58,7 +67,9 @@ export const stateReducer = createReducer(
   on(UpdateEvent, onUpdateEvent),
   on(UpdateEventSuccess, onUpdateEventSuccess),
   on(DeleteEvent, onDeleteEvent),
-  on(DeleteEventSuccess, onDeleteEventSuccess)
+  on(DeleteEventSuccess, onDeleteEventSuccess),
+  on(InitializationStart, onInitializationStart),
+  on(InitializationEnd, onInitializationEnd)
 );
 
 export const StateSelectors = {
@@ -76,6 +87,10 @@ export const StateSelectors = {
 
   get isOnError() {
     return pipe(select((s: AppState) => s.state.onError));
+  },
+
+  get configs() {
+    return pipe(select((s: AppState) => s.state.configs));
   },
 
   selectedDateEvents(startDate: Date, endDate: Date) {
