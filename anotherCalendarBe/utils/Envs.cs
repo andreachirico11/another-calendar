@@ -9,6 +9,11 @@ public class Envs
 
     public static string frontendUrl()
     {
-        return Environment.GetEnvironmentVariable("FRONTEND_URL");
+        var variable = Environment.GetEnvironmentVariable("FRONTEND_URL");
+        if (variable is null)
+        {
+            return "";
+        }
+        return variable;
     }
 }

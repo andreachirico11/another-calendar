@@ -10,9 +10,27 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var policyName = "AllowedCorsOrigins";
+
+builder.Services.AddCors(options =>
+            options.AddPolicy(name: policyName, builder =>
+                {
+                    builder.SetIsOriginAllowed((string origin) =>
+                        {
+                            var uri = new Uri(origin);
+                            return (uri.Host == "localhost");
+                        })
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials();
+                }
+            )
+);
+
 var app = builder.Build();
 
-app.UseCors(opt => opt.WithOrigins(Envs.frontendUrl()));
+app.UseCors(policyName);
+// app.UseCors(opt => opt.WithOrigins(Envs.frontendUrl()));
 // Configure the HTTP request pipeline.
 if (!Envs.isInProduction())
 {
@@ -20,8 +38,7 @@ if (!Envs.isInProduction())
     app.UseSwaggerUI();
 }
 
-
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
