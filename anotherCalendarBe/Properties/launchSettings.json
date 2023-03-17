@@ -16,8 +16,7 @@
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:7093;http://localhost:5140",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "FRONTEND_URL": "http://localhost:3333"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "anotherCalendarBe-production": {

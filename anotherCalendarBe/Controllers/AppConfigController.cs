@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using anotherCalendarBe.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace anotherCalendarBe.Controllers;
 
@@ -10,16 +11,19 @@ public class AppConfigController : ControllerBase
 
     private readonly ILogger<AppConfigController> _logger;
 
-    public AppConfigController(ILogger<AppConfigController> logger)
+    private AnotherCDbContext ctx { get; set; }
+
+    public AppConfigController(ILogger<AppConfigController> logger, AnotherCDbContext ctx)
     {
         _logger = logger;
+        this.ctx = ctx;
     }
 
 
 
     [HttpGet]
-    public AppConfig Get()
+    public async Task<AppConfig> Get()
     {
-        return new AppConfig("0.0.0");
+        return await this.ctx.AppConfig.FirstOrDefaultAsync();
     }
 }
