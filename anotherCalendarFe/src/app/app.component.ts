@@ -31,7 +31,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     this.appIsLoading = this.store.pipe(StateSelectors.isLoading);
     this.store.pipe(StateSelectors.configs).subscribe((c) => {
       this.configs = c;
-      if (!c.production) {
+      if (!c.isInProduction) {
         console.warn('----------------------');
         console.warn('Connected with api on: ');
         console.warn(c.apiUrl);

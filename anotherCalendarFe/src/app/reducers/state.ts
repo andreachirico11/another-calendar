@@ -51,7 +51,7 @@ const initialState: State = {
   selectedDate: new Date(),
   isLoading: false,
   onError: false,
-  configs: { version: '', production: true, apiUrl: '' },
+  configs: { version: '', isInProduction: true, apiUrl: '' },
 };
 
 export const stateReducer = createReducer(

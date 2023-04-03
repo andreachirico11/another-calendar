@@ -22,8 +22,8 @@ public class AppConfigController : ControllerBase
 
 
     [HttpGet]
-    public async Task<AppConfig> Get()
+    public async Task<AppConfigFe> Get()
     {
-        return await this.ctx.AppConfig.FirstOrDefaultAsync();
+        return new AppConfigFe(await this.ctx.AppConfig.FirstOrDefaultAsync());
     }
 }

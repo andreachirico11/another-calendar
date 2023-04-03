@@ -11,7 +11,7 @@
             <mat-calendar [selected]="selected | async"
                 (selectedChange)="onSelectedDateChange($event)">
             </mat-calendar>
-            <span *ngIf="!configs.production" class="version">version:
+            <span *ngIf="!configs.isInProduction" class="version">version:
                 {{configs.version}}</span>
         </div>
     </mat-drawer>

@@ -53,6 +53,6 @@ export interface FormCalendarEvent extends CalendarEventShared {
 
 export interface AppConfig {
   version: string;
-  production: boolean;
+  isInProduction: boolean;
   apiUrl: string;
 }
