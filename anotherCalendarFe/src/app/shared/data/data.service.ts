@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { delay, firstValueFrom, map, of, tap, throwError } from 'rxjs';
-import { AppConfig, CalendarEvent } from 'src/app/types';
+import { ApiCalendarEvent, AppConfig, CalendarEvent } from 'src/app/types';
 
 @Injectable({
   providedIn: 'root',
@@ -22,12 +22,16 @@ export class DataService {
     );
   }
 
-  createEvent(e: CalendarEvent) {
-    if (e.title === 'error') {
-      return throwError(() => new Error());
-    }
-    const updated: CalendarEvent = { ...e, _id: randomId() };
-    return of(updated).pipe(delay(1000));
+  createEvent(e: CalendarEvent, urlBase: string) {
+    return this.http.post<ApiCalendarEvent>(urlBase + '/calendarEvent', e).pipe(
+      map((c) => {
+        return {
+          ...c,
+          startDateTime: new Date(c.startDateTime),
+          endDateTime: new Date(c.endDateTime),
+        } as CalendarEvent;
+      })
+    );
   }
 
   updateEvent(e: CalendarEvent) {

@@ -36,7 +36,7 @@ export class EventDetailsComponent implements OnDestroy {
   }
 
   onDelete() {
-    this.store.dispatch(DeleteEvent({ eventId: this.data.event._id }));
+    this.store.dispatch(DeleteEvent({ eventId: this.data.event._id! }));
     this.sub = this.store.pipe(StateSelectors.isLoading).subscribe((isLoading) => {
       if (!isLoading) {
         this.dialogRef.close();

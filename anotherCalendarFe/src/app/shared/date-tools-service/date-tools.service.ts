@@ -41,8 +41,9 @@ export class DateToolsService {
     endDate,
     endTime,
   }: FormCalendarEvent): CalendarEvent {
+    let base = _id ? { _id } : {};
     return {
-      _id,
+      ...base,
       content,
       title,
       startDateTime: dateParser(startDate, startTime),

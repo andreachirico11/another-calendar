@@ -34,7 +34,7 @@ export enum OperationMode {
 }
 
 interface CalendarEventShared {
-  _id: string;
+  _id?: string;
   title: string;
   content: string;
 }
@@ -42,6 +42,11 @@ interface CalendarEventShared {
 export interface CalendarEvent extends CalendarEventShared {
   startDateTime: Date;
   endDateTime: Date;
+}
+
+export interface ApiCalendarEvent extends CalendarEventShared {
+  startDateTime: string;
+  endDateTime: string;
 }
 
 export interface FormCalendarEvent extends CalendarEventShared {

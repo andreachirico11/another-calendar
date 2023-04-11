@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using anotherCalendarBe;
 
@@ -10,9 +11,11 @@ using anotherCalendarBe;
 namespace anotherCalendarBe.Migrations
 {
     [DbContext(typeof(AnotherCDbContext))]
-    partial class AnotherCDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230411195948_ce table")]
+    partial class cetable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

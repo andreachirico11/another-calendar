@@ -13,10 +13,10 @@ namespace anotherCalendarBe
         }
 
         public DbSet<AppConfig> AppConfig { get; set; }
+        public DbSet<CalendarEvent> CalendarEvent { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfiguration(new EntityAppConfig());
         }
     }
 }

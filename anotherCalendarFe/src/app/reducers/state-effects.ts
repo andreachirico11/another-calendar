@@ -15,9 +15,12 @@ import {
   UpdateEventSuccess,
   UpdateEventType,
 } from './event.actions';
-import { catchError, concatMap, map, of, tap } from 'rxjs';
+import { catchError, concatMap, map, of, tap, withLatestFrom } from 'rxjs';
 import { DateToolsService } from '../shared/date-tools-service/date-tools.service';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AppState } from '.';
+import { StateSelectors } from './state';
 
 @Injectable()
 export class StateEffects {
@@ -34,9 +37,10 @@ export class StateEffects {
   createEvent$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CreateEvent),
-      concatMap(({ newEvent }: CreateEventType) => {
+      withLatestFrom(this.store.pipe(StateSelectors.configs)),
+      concatMap(([{ newEvent }, { apiUrl }]) => {
         const parsed = DateToolsService.toCalendarEvent(newEvent);
-        return this.data.createEvent(parsed);
+        return this.data.createEvent(parsed, apiUrl);
       }),
       map((eventCreated) => CreateEventSuccess({ eventCreated })),
       catchError((_) => of(CreateEventFail()))
@@ -70,5 +74,10 @@ export class StateEffects {
     );
   });
 
-  constructor(private actions$: Actions, private data: DataService, private router: Router) {}
+  constructor(
+    private actions$: Actions,
+    private data: DataService,
+    private router: Router,
+    private store: Store<AppState>
+  ) {}
 }

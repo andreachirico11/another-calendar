@@ -1,4 +1,5 @@
 using anotherCalendarBe;
+using anotherCalendarBe.models;
 using anotherCalendarBe.utils;
 using Microsoft.EntityFrameworkCore;
 
@@ -32,6 +33,8 @@ builder.Services.AddCors(
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // ----------------------------------------
 
